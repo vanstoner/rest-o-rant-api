@@ -13,6 +13,41 @@ node {
     stage('Package') {
       xldCreatePackage artifactsPath: 'build', manifestPath: 'deployit-manifest.xml', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'
     }
+   
+    stage('Test') {
+      parallel {
+                stage('API tests') {
+                    steps {
+                        echo 'Building..'
+                        sleep 7
+                    }
+                }
+                stage('Cypress tests') {
+                    steps {
+                        echo 'Building..'
+                        sleep 8
+                    }
+                }
+                stage('Protractor tests') {
+                    steps {
+                        echo 'Building..'
+                        sleep 5
+                    }
+                }
+                stage('Integration tests on Windows') {
+                    steps {
+                        echo 'Building..'
+                        sleep 11
+                    }
+                }
+                stage('Integration tests on Linux') {
+                    steps {
+                        echo 'Building..'
+                        sleep 9
+                    }
+                }
+       }
+    }
 
     stage('Publish And Deploy') {
           xldPublishPackage serverCredentials: 'Admin', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'
