@@ -20,6 +20,6 @@ node {
     }
 
     stage('Start XLR Release') {
-       xlrCreateRelease serverCredentials: 'Admin', template: 'Release rest-o-rant-api', version: 'Release for $BUILD_TAG', variables: [[propertyName: 'version', propertyValue: '$BUILD_NUMBER.0']], startRelease: true
+       xlrCreateRelease serverCredentials: 'Admin', template: 'Northgate/Release rest-o-rant-api', version: 'Release for $BUILD_TAG', variables: [[propertyName: 'version', propertyValue: '$BUILD_NUMBER.0']], startRelease: true
     }
 }
